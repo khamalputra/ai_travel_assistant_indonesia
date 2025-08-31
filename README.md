@@ -185,9 +185,9 @@ Project ini menggunakan MIT License - lihat file [LICENSE](LICENSE) untuk detail
 ## 👨‍💻 Author
 
 **Your Name**
-- GitHub: [@yourusername](https://github.com/yourusername)
-- Email: your.email@example.com
-- LinkedIn: [Your LinkedIn](https://linkedin.com/in/yourprofile)
+- GitHub: [@khamalputra](https://github.com/khamalputra)
+- Email: khamalade@gmail.com
+- LinkedIn: [khamalputra](https://linkedin.com/in/adekhameliaputra/)
 
 ## 🙏 Acknowledgments
 
@@ -200,9 +200,9 @@ Project ini menggunakan MIT License - lihat file [LICENSE](LICENSE) untuk detail
 
 Jika ada pertanyaan atau issue:
 
-1. Check [Issues](https://github.com/yourusername/ai-travel-assistant-indonesia/issues) yang sudah ada
+1. Check [Issues](https://github.com/khamalputra/ai-travel-assistant-indonesia/issues) yang sudah ada
 2. Buat issue baru dengan label yang sesuai
-3. Join discussion di [Discussions](https://github.com/yourusername/ai-travel-assistant-indonesia/discussions)
+3. Join discussion di [Discussions](https://github.com/khamalputra/ai-travel-assistant-indonesia/discussions)
 
 ---
 
