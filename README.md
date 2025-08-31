@@ -108,11 +108,11 @@ GOOGLE_API_KEY=your_gemini_api_key_here
 
 ```
 ai-travel-assistant-indonesia/
-├── travel_assistant_with_langchain.py    # Main application
-├── requirements.txt                       # Python dependencies
-├── README.md                             # Project documentation
-├── LICENSE                               # MIT License
-├── .env.example                          # Environment variables example
+├── ai_travel_assistant.py               # Main application
+├── requirements.txt                     # Python dependencies
+├── README.md                            # Project documentation
+├── LICENSE                              # MIT License
+├── .env.example                         # Environment variables example
 ├── .gitignore                           # Git ignore rules
 ├── setup.py                             # Package setup (optional)
 └── docs/                                # Documentation
