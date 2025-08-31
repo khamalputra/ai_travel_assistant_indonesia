@@ -1,0 +1,112 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.8, 3.9, "3.10", "3.11"]
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+        
+    - name: Cache pip dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+          
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install pytest black flake8
+        
+    - name: Lint with flake8
+      run: |
+        # Stop the build if there are Python syntax errors or undefined names
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # Exit-zero treats all errors as warnings
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=100 --statistics
+        
+    - name: Code formatting check with Black
+      run: |
+        black --check --diff ai_travel_assistant.py
+        
+    - name: Test import and basic functionality
+      run: |
+        python -c "
+        import sys
+        sys.path.append('.')
+        try:
+            from travel_assistant_with_langchain import check_libraries, get_basic_response
+            print('✅ Basic imports successful')
+            
+            # Test basic response function
+            response = get_basic_response('test budget')
+            assert len(response) > 0
+            print('✅ Basic functions working')
+            
+        except Exception as e:
+            print(f'❌ Test failed: {e}')
+            sys.exit(1)
+        "
+        
+  docker-test:
+    runs-on: ubuntu-latest
+    needs: test
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Build Docker image
+      run: |
+        docker build -t travel-assistant:test .
+        
+    - name: Test Docker container
+      run: |
+        docker run --rm -d --name test-container -p 8501:8501 travel-assistant:test
+        sleep 30
+        
+        # Test if container is running and healthy
+        if docker ps | grep -q test-container; then
+          echo "✅ Docker container is running"
+        else
+          echo "❌ Docker container failed to start"
+          docker logs test-container
+          exit 1
+        fi
+        
+        # Cleanup
+        docker stop test-container
+        
+  security-scan:
+    runs-on: ubuntu-latest
+    needs: test
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Run security scan with bandit
+      run: |
+        pip install bandit
+        bandit -r . -f json -o bandit-report.json || true
+        
+    - name: Upload security scan results
+      uses: actions/upload-artifact@v3
+      with:
+        name: security-scan-results
+        path: bandit-report.json
