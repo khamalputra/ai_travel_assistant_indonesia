@@ -108,17 +108,19 @@ GOOGLE_API_KEY=your_gemini_api_key_here
 
 ```
 ai-travel-assistant-indonesia/
-├── ai_travel_assistant.py               # Main application
-├── requirements.txt                     # Python dependencies
-├── README.md                            # Project documentation
-├── LICENSE                              # MIT License
-├── .env.example                         # Environment variables example
-├── .gitignore                           # Git ignore rules
-├── setup.py                             # Package setup (optional)
-└── docs/                                # Documentation
-    ├── installation.md                  # Detailed installation guide
-    ├── api_setup.md                     # API key setup guide
-    └── contributing.md                  # Contribution guidelines
+├── app/
+│   └── main.py                    # Your main code
+├── docs/
+│   └── CONTRIBUTING.md                  # Documentation
+│   └── LICENSE
+│   └── README.md
+├── docker/
+│   ├── Dockerfile
+│   └── docker-compose.yml
+├── .github/workflows/ci.yml
+├── requirements.txt
+├── .gitignore
+└── .env.example
 ```
 
 ## 🤝 Contributing
