@@ -38,7 +38,7 @@ Asisten travel AI yang didukung oleh LangChain dan Google Gemini 2.0 Flash, dira
 
 1. **Clone repository:**
    ```bash
-   git clone https://github.com/yourusername/ai-travel-assistant-indonesia.git
+   git clone https://github.com/khamalputra/ai-travel-assistant-indonesia.git
    cd ai-travel-assistant-indonesia
    ```
 
@@ -49,7 +49,7 @@ Asisten travel AI yang didukung oleh LangChain dan Google Gemini 2.0 Flash, dira
 
 3. **Run application:**
    ```bash
-   streamlit run travel_assistant_with_langchain.py
+   streamlit run ai_travel_assistant.py
    ```
 
 4. **Access aplikasi:**
